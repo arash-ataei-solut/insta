@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if request.user.isauthenticated %}
+    <a href="{% url 'following' %}">my followings</a>
+    <a href="{% url 'follower' %}">my followers</a>
+{% else %}
+    <a href="{% url 'login' %}">login</a>
+    <a href="{% url 'sign-up' %}">sign up</a>
+{% endif %}
+<form action="{% url 'user-list' %}">
+    <input type="text" name="q" placeholder="search">
+    <input type="submit" value="search">
+</form>
+{% for profile in object_list %}
+    <a href="{% url 'profile' pk=profile.pk %}">{{ profile.user.username }}</a>
+{% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="{% url 'user-list' %}">users list</a>
+<h>username: {{ object.user.username }}</h>
+{% for p in object.following.all %}
+    <p>{{ p.user.username }}</p>
+{% endfor %}
+{% if object in request.user.profile.following.all %}
+    <a href="{% url 'unfollow' pk=object.pk %}">unfollow</a>
+{% else %}
+    <a href="{% url 'follow' pk=object.pk %}">follow</a>
+{% endif %}
+</body>
+</html>
